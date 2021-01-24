@@ -4,14 +4,17 @@
 	--color-dark-blue: #363F5F;
 	--color-bg-card: #FFFFFF;
 	--color-bg-body: #F0F2F5;
-	--color-bg-header: #2D4A22;
+	--color-bg-header: #006437;
 	--color-logo: #FFFFFF;
 	--color-text-header: #FFFFFF;
 	--color-text-total: #FFFFFF;
-	--color-green: #49AA26;
 	--color-grey-blue: #969CB3;
-	--color-income: #12A454;
-	--color-expense: #E92929;
+	--color-income: #2CB879;
+	--color-expense: #D64045;
+}
+
+html {
+	font-size: 93.75%;
 }
 
 /* = Global = */
@@ -29,9 +32,66 @@ body {
 	background-color: var(--color-bg-body);
 }
 
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	border-width: 0;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+}
+
 .container {
 	width: min(90vw, 800px);
 	margin: 0 auto;
+}
+
+/* = Links & Buttons = */
+a {
+	text-decoration: none;
+}
+
+.button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 50px;
+	padding: 0;
+	border-radius: 0.25rem;
+	border: none;
+	cursor: pointer;
+	transition: 200ms;
+}
+
+.button:hover {
+	filter: brightness(1.2);
+}
+
+.button.new {
+	width: auto;
+	height: auto;
+	display: inline-block;
+	margin-bottom: 0.8rem;
+	color: var(--color-income);
+}
+
+.button.save {
+	color: var(--color-text-total);
+	background-color: var(--color-income);
+}
+
+.button.cancel {
+	border: 2px solid var(--color-expense);
+	color: var(--color-expense);
+}
+
+.button.cancel:hover {
+	border: 2px solid var(--color-expense);
+	color: var(--color-text-total);
+	background-color: var(--color-expense);
 }
 
 /* = Titles = */
@@ -79,6 +139,9 @@ main {
 }
 
 .card h3 {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 	font-size: 1rem;
 	font-weight: 400;
 }
@@ -87,12 +150,18 @@ main {
 	margin-top: 1rem;
 	font-size: 2rem;
 	font-weight: 400;
-	line-height: 2rem;
+	line-height: 3rem;
 }
 
 .card.total {
 	color: var(--color-text-total);
-	background-color: var(--color-green);
+	background-color: var(--color-income);
+}
+
+/* = Table = */
+#transactions {
+	display: block;
+	overflow-x: auto;
 }
 
 #data-table {
@@ -104,6 +173,11 @@ main {
 table thead tr th:first-child,
 table tbody tr td:first-child {
 	border-radius: 0.25rem 0 0 0.25rem;
+}
+
+table thead tr th:last-child,
+table tbody tr td:last-child {
+	border-radius: 0 0.25rem 0.25rem 0;
 }
 
 table thead th {
@@ -139,10 +213,83 @@ td.expense {
 	color: var(--color-expense);
 }
 
+/* = Modal =*/
+.modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100vw;
+	height: 100vh;
+	background-color: #000000B3;
+	opacity: 0;
+	visibility: hidden;
+	transition: 200ms;
+	z-index: 999;
+}
+
+.modal-overlay.active {
+	opacity: 1;
+	visibility: visible;
+}
+
+.modal {
+	width: 90%;
+	max-width: 500px;
+	padding: 2.4rem;
+	border-radius: .25rem;
+	background-color: var(--color-bg-body);
+}
+
+/* = Form = */
+#form h2 {
+	margin-top: 0;
+}
+
+#form .input-group {
+	margin-top: 0.8rem;
+}
+
+#form .input-group input {
+	width: 100%;
+	padding: 0.8rem;
+	border-radius: 0.25rem;
+	border: none;
+}
+
+#form .input-group small {
+	opacity: 0.4;
+}
+
+#form .input-group.actions {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+}
+
 /* = Footer = */
 footer {
 	padding: 4rem 0 2rem;
 	text-align: center;
-	color: var(--color-dark-blue);
 	opacity: 0.6;
+}
+
+footer img {
+	height: 14px;
+}
+
+/* = Responsive = */
+@media (min-width: 800px) {
+	html {
+		font-size: 87.5%;
+	}
+
+	#balance {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 2rem;
+	}
 }
