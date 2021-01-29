@@ -11,6 +11,7 @@
 	--color-grey-blue: #969CB3;
 	--color-income: #2CB879;
 	--color-expense: #D64045;
+	--color-total: #969696;
 }
 
 html {
@@ -155,7 +156,15 @@ main {
 
 .card.total {
 	color: var(--color-text-total);
+	background-color: var(--color-total);
+}
+
+.card.positive {
 	background-color: var(--color-income);
+}
+
+.card.negative {
+	background-color: var(--color-expense);
 }
 
 /* = Table = */
